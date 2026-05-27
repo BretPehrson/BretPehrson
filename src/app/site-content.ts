@@ -38,7 +38,7 @@ const careerStartYear = 2008;
 const experienceYears = new Date().getFullYear() - careerStartYear;
 
 export const header = 
-`Building modern software solutions with ${experienceYears}+ years of experience across desktop, web, APIs, and cloud technologies. Specializing in Blazor, WPF, .NET Core, and scalable enterprise applications.`;
+ 'Building modern software solutions with ${experienceYears}+ years of experience across desktop, web, APIs, and cloud technologies. Specializing in Blazor, WPF, .NET Core, and scalable enterprise applications.';
 
 export const homeSummary =
   'I help teams inherit difficult systems, make them understandable, and move them forward without disrupting the business.';
@@ -108,7 +108,7 @@ export const experience: readonly ExperienceEntry[] = [
     outcome: 'Delivered tools that reduced operational friction and gave teams better control over daily work.',
     bullets: [
       'Designed and built a company-wide ticketing system to create, update, and maintain change records across organizational processes.',
-      'Created an application management and launch platform enabling deployment of .NET applications across the organization.',
+      'Engineered scalable backend processing systems supporting over 1 million student loans per month, with a focus on performance optimization, reliability, and efficient resource utilization.',
       'Built a high-volume batch letter processing system using lazy-loading to ensure reliable output across large print runs.',
       'Designed centralized error handling infrastructure for departmental scripts, including logging, alerting, and historical reporting.',
       'Worked directly with department managers to design, build, and maintain mission-critical internal applications.',
