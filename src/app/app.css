@@ -1,0 +1,112 @@
+:host {
+  --bg-0: #f4efe7;
+  --bg-1: #e8dfd3;
+  --bg-2: #f9f6f1;
+  --ink-900: #1f2933;
+  --ink-700: #3f4e5a;
+  --ink-500: #5c6f7d;
+  --line: #b7aa99;
+  --accent: #0f766e;
+  --accent-hover: #115e59;
+  --panel: rgba(255, 252, 247, 0.86);
+  --shadow: 0 10px 28px rgba(31, 41, 51, 0.11);
+
+  color: var(--ink-900);
+  font-family: 'Avenir Next', 'Trebuchet MS', 'Segoe UI', sans-serif;
+  display: block;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 85% 14%, rgba(177, 228, 223, 0.5), transparent 42%),
+    radial-gradient(circle at 15% 84%, rgba(212, 181, 150, 0.4), transparent 34%),
+    linear-gradient(155deg, var(--bg-0), var(--bg-1) 46%, var(--bg-2));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 2.5rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 3.25rem;
+}
+
+.brand {
+  margin: 0;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-900);
+  text-decoration: none;
+}
+
+.profile-nav {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.profile-nav a {
+  color: var(--ink-700);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  transition: all 160ms ease;
+}
+
+.profile-nav a:hover,
+.profile-nav a:focus-visible {
+  color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+main {
+  margin-top: 0;
+}
+
+footer {
+  margin-top: 2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+  color: var(--ink-500);
+}
+
+footer p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+}
+
+@media print {
+  :host {
+    background: #fff;
+    min-height: auto;
+  }
+
+  .topbar,
+  footer {
+    display: none;
+  }
+
+  .page-shell {
+    max-width: none;
+    padding: 0;
+  }
+}

@@ -1,0 +1,66 @@
+<section class="hero" aria-labelledby="hero-heading">
+  <p class="eyebrow">{{ role }}</p>
+  <h3 id="hero-heading">{{ header }}</h3>
+  <p class="summary">{{ summary }}</p>
+  <div class="hero-meta">
+    <span>{{ location }}</span>
+    <span>{{ years }}</span>
+    <span>{{ stack }}</span>
+  </div>
+  <div class="cta-row">
+    <a class="btn btn-primary" [href]="emailHref">Start a conversation</a>
+    <a class="btn btn-secondary" href="/resume">View full resume</a>
+  </div>
+</section>
+
+<section id="work" class="section" aria-labelledby="work-heading">
+  <div class="section-head">
+    <p class="eyebrow">What I do</p>
+    <h2 id="work-heading">The kind of work I’m known for</h2>
+  </div>
+
+  <div class="card-grid two-up">
+    @for (group of offerings; track group.label) {
+      <article class="panel-card">
+        <h3>{{ group.label }}</h3>
+        <div class="chip-list" aria-label="{{ group.label }}">
+          @for (item of group.items; track item) {
+            <span>{{ item }}</span>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="section" aria-labelledby="strengths-heading">
+  <div class="section-head">
+    <p class="eyebrow">Why people work with me</p>
+    <h2 id="strengths-heading">Clear, pragmatic help for difficult systems</h2>
+  </div>
+
+  <div class="card-grid">
+    @for (strength of strengths; track strength) {
+      <article class="panel-card compact-card">
+        <p>{{ strength }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section id="contact" class="contact-callout" aria-labelledby="contact-heading">
+  <div>
+    <p class="eyebrow">Contact</p>
+    <h2 id="contact-heading">Need help with a software project?</h2>
+    <p>
+      I’m available to discuss modernization, API design, enterprise software support,
+      and Blazor-based web development.
+    </p>
+  </div>
+
+  <div class="contact-panel">
+    <p class="contact-label">Best first step</p>
+    <a [href]="emailHref" class="contact-email">{{ email }}</a>
+    <a class="btn btn-primary" [href]="emailHref">Email me</a>
+  </div>
+</section>

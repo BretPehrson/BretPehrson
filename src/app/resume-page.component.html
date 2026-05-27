@@ -1,0 +1,79 @@
+<section class="resume-header">
+  <div>
+    <p class="eyebrow">Full resume</p>
+    <h1>Experience, skills, and education</h1>
+  </div>
+  <a class="btn btn-secondary" href="/Bret%20Pehrson.docx" download="Bret Pehrson Resume.docx">Download DOCX</a>
+</section>
+
+<section class="section" aria-labelledby="skills-heading">
+  <div class="section-head">
+    <p class="eyebrow">Technical skills</p>
+    <h2 id="skills-heading">Core technologies and tools</h2>
+  </div>
+
+  <div class="skill-grid">
+    @for (group of skillGroups; track group.label) {
+      <article class="skill-card">
+        <h3>{{ group.label }}</h3>
+        <div class="chip-list" aria-label="{{ group.label }}">
+          @for (item of group.items; track item) {
+            <span>{{ item }}</span>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="section" aria-labelledby="experience-heading">
+  <div class="section-head">
+    <p class="eyebrow">Professional experience</p>
+    <h2 id="experience-heading">Career history</h2>
+  </div>
+
+  <div class="experience-list">
+    @for (job of experience; track job.company) {
+      <article class="experience-card">
+        <div class="experience-header">
+          <div>
+            <h3>{{ job.company }}</h3>
+            <p class="experience-title">{{ job.title }}</p>
+          </div>
+          <div class="experience-meta">
+            <span>{{ job.location }}</span>
+            <span>{{ job.dates }}</span>
+          </div>
+        </div>
+
+        <p class="experience-headline">{{ job.headline }}</p>
+        <p class="experience-outcome">{{ job.outcome }}</p>
+
+        <ul class="bullet-list">
+          @for (bullet of job.bullets; track bullet) {
+            <li>{{ bullet }}</li>
+          }
+        </ul>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="section" aria-labelledby="education-heading">
+  <div class="section-head">
+    <p class="eyebrow">Education</p>
+    <h2 id="education-heading">Academic background</h2>
+  </div>
+
+  <div class="education-grid">
+    @for (school of education; track school.school) {
+      <article class="education-card">
+        <h3>{{ school.school }}</h3>
+        <p class="education-credential">{{ school.credential }}</p>
+        <p>{{ school.location }}</p>
+        <p>{{ school.dates }}</p>
+        <p>{{ school.gpa }}</p>
+      </article>
+    }
+  </div>
+</section>
