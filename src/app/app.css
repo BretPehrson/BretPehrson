@@ -33,17 +33,20 @@
 
 .topbar {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: center;
+  gap: 1.1rem;
+  text-align: center;
   margin-bottom: 3.25rem;
 }
 
 .brand {
   margin: 0;
-  font-size: 1.18rem;
+  font-size: clamp(2.3rem, 6vw, 4.25rem);
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  line-height: 1.05;
   color: var(--ink-900);
   text-decoration: none;
 }
@@ -88,8 +91,7 @@ footer p {
 
 @media (max-width: 640px) {
   .topbar {
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 2rem;
   }
 }

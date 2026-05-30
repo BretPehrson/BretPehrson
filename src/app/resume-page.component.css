@@ -21,6 +21,21 @@
   gap: 1rem;
 }
 
+.back-home {
+  display: inline-block;
+  margin-bottom: 0.55rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.back-home:hover,
+.back-home:focus-visible {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
 .eyebrow {
   margin: 0;
   color: var(--ink-500);

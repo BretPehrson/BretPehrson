@@ -33,6 +33,33 @@
   </div>
 </section>
 
+<section class="section" aria-labelledby="client-work-heading">
+  <div class="section-head">
+    <p class="eyebrow">Selected client work</p>
+    <h2 id="client-work-heading">Public websites for local businesses</h2>
+  </div>
+
+  <div class="card-grid two-up project-grid">
+    @for (project of clientProjects; track project.name) {
+      <article class="panel-card project-card">
+        <div class="project-head">
+          <h3>{{ project.name }}</h3>
+          <span class="project-status">{{ project.status }}</span>
+        </div>
+        <p class="project-summary">{{ project.summary }}</p>
+        @if (project.href && project.linkLabel) {
+          <a class="project-link" [href]="project.href" target="_blank" rel="noopener noreferrer">{{ project.linkLabel }}</a>
+        }
+        <div class="chip-list" aria-label="{{ project.name }} technologies and focus">
+          @for (item of project.tech; track item) {
+            <span>{{ item }}</span>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
 <section class="section" aria-labelledby="strengths-heading">
   <div class="section-head">
     <p class="eyebrow">Why people work with me</p>

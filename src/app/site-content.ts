@@ -26,6 +26,15 @@ export type EducationEntry = {
   readonly gpa: string;
 };
 
+export type ClientProject = {
+  readonly name: string;
+  readonly summary: string;
+  readonly status: 'Live' | 'In Progress';
+  readonly href?: string;
+  readonly linkLabel?: string;
+  readonly tech: readonly string[];
+};
+
 export const siteTitle = 'Bret Pehrson';
 export const role = 'Senior .NET Software Developer';
 export const location = 'Salt Lake City, UT';
@@ -38,7 +47,7 @@ const careerStartYear = 2008;
 const experienceYears = new Date().getFullYear() - careerStartYear;
 
 export const header = 
- 'Building modern software solutions with ${experienceYears}+ years of experience across desktop, web, APIs, and cloud technologies. Specializing in Blazor, WPF, .NET Core, and scalable enterprise applications.';
+ `Building modern software solutions with ${experienceYears}+ years of experience across desktop, web, APIs, and cloud technologies. Specializing in Blazor, WPF, .NET Core, and scalable enterprise applications.`;
 
 export const homeSummary =
   'I help teams inherit difficult systems, make them understandable, and move them forward without disrupting the business.';
@@ -66,7 +75,9 @@ export const offerings: readonly SkillGroup[] = [
       'Modernizing legacy .NET systems',
       'Designing REST APIs',
       'Stabilizing enterprise applications',
-      'SQL Server performance work'
+      'SQL Server optimization',
+      'Reporting: including SSRS, Telerik reporting and SAP Crystal Reports',
+      'Cloud-hosted Blazor applications'
     ]
   },
   {
@@ -77,6 +88,27 @@ export const offerings: readonly SkillGroup[] = [
       'You need someone hands-on',
       'Reliability matters more than hype'
     ]
+  }
+];
+
+export const clientProjects: readonly ClientProject[] = [
+  {
+    name: 'NE Plumbing Inc',
+    summary:
+      'Built and maintain a cloud-hosted Blazor web application using .NET and Azure, implementing automated CI/CD deployment through GitHub Actions and delivering a responsive, mobile-friendly experience designed to drive customer engagement and lead generation.',
+    status: 'Live',
+    href: 'https://www.neplumbinginc.com',
+    linkLabel: 'View live site',
+    tech: ['Blazor Server App', 'Azure Cloud Hosting', 'Github Actions for CI/CD']
+  },
+  {
+    name: 'TLE Studio by Tonya Earl',
+    summary:
+      'Built and maintain a cloud-hosted Blazor application in Azure with custom authentication workflows, Cloudflare Turnstile bot protection, email-based account verification, appointment scheduling, and administrative tools for user, calendar, and booking management.',
+    status: 'In Progress',
+    href: 'https://tlestudio-b3hrdnhcfqa2c4b0.canadacentral-01.azurewebsites.net',
+    linkLabel: 'View live site',
+    tech: ['User management', 'Booking flow', 'Administrative tools']
   }
 ];
 

@@ -126,6 +126,16 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.project-grid > .project-card {
+  flex: 1 1 320px;
+}
+
 .highlight-card,
 .panel-card,
 .contact-panel {
@@ -144,6 +154,48 @@ h3 {
   margin: 0;
   color: var(--ink-900);
   font-weight: 700;
+}
+
+.project-card {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.project-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.project-status {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-700);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.project-summary {
+  margin: 0;
+  color: var(--ink-700);
+  line-height: 1.6;
+}
+
+.project-link {
+  width: fit-content;
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.project-link:hover,
+.project-link:focus-visible {
+  text-decoration: underline;
 }
 
 .chip-list {

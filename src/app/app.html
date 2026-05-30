@@ -2,7 +2,6 @@
   <header class="topbar">
     <a class="brand" routerLink="/">{{ title }}</a>
     <nav aria-label="Site navigation" class="profile-nav">
-      <a routerLink="/">Home</a>
       <a routerLink="/resume">Resume</a>
       @for (profile of profileLinks; track profile.label) {
         <a [href]="profile.href" target="_blank" rel="noopener noreferrer">{{ profile.label }}</a>

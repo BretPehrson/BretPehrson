@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import {
+  clientProjects,
   email,
   emailHref,
   homeSummary,
@@ -26,6 +27,7 @@ export class HomePageComponent {
   protected readonly summary = homeSummary;
   protected readonly strengths = strengths;
   protected readonly offerings = offerings;
+  protected readonly clientProjects = clientProjects;
   protected readonly header = header;
   protected readonly years = years;
   protected readonly stack = stack;
