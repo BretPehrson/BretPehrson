@@ -16,6 +16,8 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/bret-pehrson/browser",
+            "index": "src/index.html",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -26,15 +28,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -58,9 +52,11 @@
               "sourceMap": true
             },
             "github-pages": {
-              "outputPath": "docs",
-              "outputMode": "static",
-              "browser": "src/main.ts",
+              "outputPath": {
+                "base": "docs",
+                "browser": ""
+              },
+              "baseHref": "/BretPehrson/",
               "optimization": true,
               "extractLicenses": false,
               "sourceMap": false,
