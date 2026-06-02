@@ -58,7 +58,7 @@ export const stack =
     'Microsoft stack, Blazor, REST, SQL Server';
 
 export const profileLinks: readonly ProfileLink[] = [
-  { label: 'GitHub', href: 'https://www.github.com/bretpdev' },
+  { label: 'GitHub', href: 'https://www.github.com/bretpehrson' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/bretpehrson/' }
 ];
 
