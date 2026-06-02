@@ -60,6 +60,7 @@
             "github-pages": {
               "outputPath": "docs",
               "outputMode": "static",
+              "browser": "src/main.ts",
               "optimization": true,
               "extractLicenses": false,
               "sourceMap": false,
