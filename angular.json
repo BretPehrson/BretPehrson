@@ -56,7 +56,7 @@
                 "base": "docs",
                 "browser": ""
               },
-              "baseHref": "/BretPehrson/",
+              "baseHref": "/",
               "optimization": true,
               "extractLicenses": false,
               "sourceMap": false,
