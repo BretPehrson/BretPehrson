@@ -57,6 +57,7 @@
                 "browser": ""
               },
               "baseHref": "/",
+              "outputHashing": "all",
               "optimization": true,
               "extractLicenses": false,
               "sourceMap": false,
