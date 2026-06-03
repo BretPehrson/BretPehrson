@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   clientProjects,
@@ -17,11 +17,12 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent {
+  private readonly router = inject(Router);
+
   protected readonly role = role;
   protected readonly location = location;
   protected readonly email = email;
@@ -33,4 +34,9 @@ export class HomePageComponent {
   protected readonly header = header;
   protected readonly years = years;
   protected readonly stack = stack;
+
+  protected goToResume(event: Event): void {
+    event.preventDefault();
+    void this.router.navigateByUrl('/resume');
+  }
 }
