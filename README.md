@@ -36,6 +36,37 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
+## Deploying To GitHub Pages
+
+This project publishes from the `docs/` folder.
+
+Treat folders this way:
+
+- `public/` is your source assets (resume files, favicons, CNAME).
+- `docs/` is generated output committed for GitHub Pages.
+
+When you update resume files:
+
+1. Replace files in `public/`.
+2. Run:
+
+```bash
+npm run build:pages
+```
+
+3. Stage generated site output:
+
+```bash
+npm run stage:pages
+```
+
+4. Commit and push.
+
+Notes:
+
+- Do not hand-edit files in `docs/`; always regenerate them.
+- Keep resume filenames in `public/` aligned with links in `src/app/resume-page.component.html`.
+
 ## Running unit tests
 
 To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
