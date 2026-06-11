@@ -38,34 +38,35 @@ This will compile your project and store the build artifacts in the `dist/` dire
 
 ## Deploying To GitHub Pages
 
-This project publishes from the `docs/` folder.
+This repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml`.
+
+On every push to `main`, GitHub will:
+
+1. Install dependencies.
+2. Run `npm run build:pages`.
+3. Deploy the generated site to GitHub Pages.
 
 Treat folders this way:
 
 - `public/` is your source assets (resume files, favicons, CNAME).
-- `docs/` is generated output committed for GitHub Pages.
+- `docs/` is generated build output used by the workflow artifact.
 
-When you update resume files:
+### One-Time Setup In GitHub
+
+1. Open repo Settings -> Pages.
+2. Under Build and deployment, set Source to GitHub Actions.
+3. Push to `main` (or run the workflow manually from the Actions tab).
+
+### Update Flow
 
 1. Replace files in `public/`.
-2. Run:
-
-```bash
-npm run build:pages
-```
-
-3. Stage generated site output:
-
-```bash
-npm run stage:pages
-```
-
-4. Commit and push.
+2. Commit and push.
+3. Wait for the Deploy To GitHub Pages workflow to finish.
 
 Notes:
 
-- Do not hand-edit files in `docs/`; always regenerate them.
 - Keep resume filenames in `public/` aligned with links in `src/app/resume-page.component.html`.
+- You no longer need to run `npm run build:pages` locally just to deploy.
 
 ## Running unit tests
 
