@@ -11,7 +11,7 @@ import { education, experience, skillGroups } from './site-content';
 })
 export class ResumePageComponent {
   // Bump this token whenever you replace resume files (date, number, or any unique tag).
-  protected readonly resumeAssetVersion = 'v1';
+  protected readonly resumeAssetVersion = 'v2';
   protected readonly resumeBaseName = 'Bret Pehrson';
   protected readonly docxFileName = `${this.resumeBaseName}.docx`;
   protected readonly pdfFileName = `${this.resumeBaseName}.pdf`;
