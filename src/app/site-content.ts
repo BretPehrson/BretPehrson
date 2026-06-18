@@ -117,7 +117,7 @@ export const experience: readonly ExperienceEntry[] = [
     company: 'University of Utah - UIT, Northstar Team',
     title: 'Software Developer IV (Senior Level)',
     location: 'Salt Lake City, UT',
-    dates: '02/2021 - Present',
+    dates: '02/2021 - 06/2026',
     headline:
       'Modernizing a legacy WPF/WCF enterprise platform into a Blazor and REST-based web architecture.',
     outcome:
