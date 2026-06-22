@@ -117,7 +117,7 @@ export const experience: readonly ExperienceEntry[] = [
     company: 'University of Utah - UIT, Northstar Team',
     title: 'Software Developer IV (Senior Level)',
     location: 'Salt Lake City, UT',
-    dates: '02/2021 - 06/2026',
+    dates: '02/2022 - 06/2026',
     headline:
       'Modernizing a legacy WPF/WCF enterprise platform into a Blazor and REST-based web architecture.',
     outcome:
@@ -134,7 +134,7 @@ export const experience: readonly ExperienceEntry[] = [
     company: 'Utah Higher Education Assistance Authority (UHEAA)',
     title: 'Software Developer II',
     location: 'Salt Lake City, UT',
-    dates: '10/2008 - 12/2020',
+    dates: '10/2008 - 12/2021',
     headline:
       'Built internal systems that improved tracking, deployment, batch processing, and support visibility across the organization.',
     outcome: 'Delivered tools that reduced operational friction and gave teams better control over daily work.',
