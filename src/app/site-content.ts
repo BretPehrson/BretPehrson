@@ -47,7 +47,7 @@ const careerStartYear = 2008;
 const experienceYears = new Date().getFullYear() - careerStartYear;
 
 export const header = 
- `Building modern software solutions with ${experienceYears}+ years of experience across desktop, web, APIs, and cloud technologies. Specializing in Blazor, WPF, .NET Core, and scalable enterprise applications.`;
+ `Senior .NET Software Developer with ${experienceYears}+ years of experience spanning large enterprise organizations and mission-critical systems. Hands-on with modern cloud and API development, including Azure Functions, Azure application hosting, REST API design, and CI/CD pipelines using GitHub Actions. Key contributor on a migration from a legacy WPF/WCF monolith to a modern Blazor + REST API architecture with OAuth security and Docker hosting. Also builds Angular and React/Next.js sites with serverless Azure backends for small businesses, leveraging AI-assisted development (GitHub Copilot with Claude models, agent mode) to accelerate delivery.`;
 
 export const homeSummary =
   'I help teams inherit difficult systems, make them understandable, and move them forward without disrupting the business.';
@@ -114,7 +114,7 @@ export const clientProjects: readonly ClientProject[] = [
 
 export const experience: readonly ExperienceEntry[] = [
   {
-    company: 'University of Utah - UIT, Northstar Team',
+    company: 'University of Utah (UIT)',
     title: 'Software Developer IV (Senior Level)',
     location: 'Salt Lake City, UT',
     dates: '02/2022 - 06/2026',
@@ -123,11 +123,12 @@ export const experience: readonly ExperienceEntry[] = [
     outcome:
       'Keeping production stable while incrementally moving the system toward a maintainable web-first future.',
     bullets: [
-      'Member of a small four-person team responsible for a large monolithic WPF and WCF enterprise system with no formal documentation, learning the platform from the inside out and driving improvements independently.',
-      'Leading modernization of the legacy desktop platform by incrementally migrating to a Blazor web application with a REST API layer, OAuth 2.0 security, Entity Framework ORM, and Docker-based hosting.',
-      'Architect and hands-on implementer of the new API layer replacing WCF backend services while maintaining backward compatibility for legacy clients.',
-      'Own and maintain a complex IIS-hosted ASP.NET MVC application that supports the existing backend across Windows Server environments.',
-      'Perform SQL Server performance analysis, query optimization, and schema navigation to keep enterprise data operations stable.'
+      'Member of a small four-person team responsible for a large, complex monolithic enterprise application built on WPF and WCF with no formal documentation, learning the system from the inside out and driving improvements independently.',
+      'Played a key role in modernizing the legacy WPF/WCF platform, incrementally migrating it to a Blazor web application with a REST API layer, OAuth 2.0 security, Entity Framework ORM, and Docker-based hosting.',
+      'Architect and hands-on implementer of new REST API layer replacing WCF backend, designing endpoints, security model, and data access patterns while maintaining backward compatibility with legacy clients; set up GitHub Actions pipelines for automated build and deployment.',
+      'Own and maintain complex IIS-hosted ASP.NET MVC application supporting the existing WCF backend across Windows Server environments.',
+      'Perform SQL Server performance analysis, query optimization, and schema navigation to ensure stability across enterprise data operations.',
+      'Mentored junior developers and helped onboard and train new team members on the codebase and team practices.'
     ]
   },
   {
@@ -139,12 +140,12 @@ export const experience: readonly ExperienceEntry[] = [
       'Built internal systems that improved tracking, deployment, batch processing, and support visibility across the organization.',
     outcome: 'Delivered tools that reduced operational friction and gave teams better control over daily work.',
     bullets: [
-      'Designed and built a company-wide ticketing system to create, update, and maintain change records across organizational processes.',
+      'Designed and built a company-wide ticketing system to create, update, and maintain change records across all organizational processes.',
+      'Designed and implemented an enterprise identity and access management system providing centralized user provisioning, authentication, and access control across multiple applications using LDAP and role-based authorization models.',
       'Engineered scalable backend processing systems supporting over 1 million student loans per month, with a focus on performance optimization, reliability, and efficient resource utilization.',
-      'Built a high-volume batch letter processing system using lazy-loading to ensure reliable output across large print runs.',
-      'Designed centralized error handling infrastructure for departmental scripts, including logging, alerting, and historical reporting.',
-      'Worked directly with department managers to design, build, and maintain mission-critical internal applications.',
-      'Trained new developers on best practices, modern coding standards, and object-oriented design principles.'
+      'Built high-volume batch letter processing system using lazy-loading to ensure reliable output across large print runs.',
+      'Designed and implemented centralized error handling infrastructure for departmental scripts, including logging, alerting, and historical reporting, to keep all teams informed of production issues.',
+      'Mentored and trained new developers on best practices, modern coding standards, and object-oriented design principles.'
     ]
   }
 ];
@@ -152,11 +153,11 @@ export const experience: readonly ExperienceEntry[] = [
 export const skillGroups: readonly SkillGroup[] = [
   {
     label: 'Languages & Frameworks',
-    items: ['C#', '.NET Framework 4.x', '.NET 6+', 'ASP.NET MVC', 'ASP.NET Core', 'Blazor', 'WCF', 'WPF', 'VB.NET', 'JavaScript', 'T-SQL']
+    items: ['C#', '.NET Framework 4.x', '.NET Core', 'ASP.NET MVC', 'ASP.NET Core', 'Blazor', 'Angular', 'React', 'Next.js', 'TypeScript', 'JavaScript', 'WCF', 'WPF', 'T-SQL']
   },
   {
     label: 'Data & Reporting',
-    items: ['SQL Server', 'Entity Framework', 'Stored Procedures', 'SSRS', 'SAP Crystal Reports']
+    items: ['SQL Server', 'Entity Framework', 'Transact-SQL', 'Stored Procedures', 'SSRS', 'SAP Crystal Reports', 'Telerik Reporting']
   },
   {
     label: 'Security & APIs',
@@ -164,7 +165,7 @@ export const skillGroups: readonly SkillGroup[] = [
   },
   {
     label: 'Infrastructure & Tools',
-    items: ['IIS 10', 'Windows Server', 'Docker', 'Visual Studio 2022', 'GitHub', 'SVN', 'JSON']
+    items: ['Azure App Service', 'Azure Functions (Serverless)', 'GitHub Actions (CI/CD)', 'Docker', 'IIS 10', 'Windows Server', 'Visual Studio', 'VSCode', 'GitHub', 'JSON', 'GitHub Copilot (Agent Mode)', 'Claude AI']
   }
 ];
 
