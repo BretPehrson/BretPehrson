@@ -23,7 +23,6 @@ export type EducationEntry = {
   readonly credential: string;
   readonly location: string;
   readonly dates: string;
-  readonly gpa: string;
 };
 
 export type ClientProject = {
@@ -128,7 +127,8 @@ export const experience: readonly ExperienceEntry[] = [
       'Architect and hands-on implementer of new REST API layer replacing WCF backend, designing endpoints, security model, and data access patterns while maintaining backward compatibility with legacy clients; set up GitHub Actions pipelines for automated build and deployment.',
       'Own and maintain complex IIS-hosted ASP.NET MVC application supporting the existing WCF backend across Windows Server environments.',
       'Perform SQL Server performance analysis, query optimization, and schema navigation to ensure stability across enterprise data operations.',
-      'Mentored junior developers and helped onboard and train new team members on the codebase and team practices.'
+      'Mentored junior developers and helped onboard and train new team members on the codebase and team practices.',
+      'Worked with Confluence and Jira to document system architecture, API endpoints, and development processes for team knowledge sharing and onboarding.'
     ]
   },
   {
@@ -174,14 +174,12 @@ export const education: readonly EducationEntry[] = [
     school: 'Neumont University',
     credential: 'B.S. Computer Science',
     location: 'Salt Lake City, UT',
-    dates: '01/2007 - 09/2008',
-    gpa: 'GPA: 3.1'
+    dates: '01/2007 - 09/2008'
   },
   {
     school: 'Utah Valley University',
-    credential: 'A.A.S. Mathematics Education',
+    credential: 'Associate of Applied Science',
     location: 'Orem, UT',
-    dates: '03/2004 - 12/2006',
-    gpa: 'GPA: 3.2'
+    dates: '03/2004 - 12/2006'
   }
 ];
