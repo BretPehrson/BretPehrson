@@ -165,7 +165,7 @@ export const skillGroups: readonly SkillGroup[] = [
   },
   {
     label: 'Infrastructure & Tools',
-    items: ['Azure App Service', 'Azure Functions (Serverless)', 'GitHub Actions (CI/CD)', 'Docker', 'IIS 10', 'Windows Server', 'Visual Studio', 'VSCode', 'GitHub', 'JSON', 'GitHub Copilot (Agent Mode)', 'Claude AI']
+    items: ['Azure App Service', 'Azure Functions (Serverless)', 'GitHub Actions (CI/CD)', 'Docker', 'IIS 10', 'Windows Server', 'Visual Studio', 'VSCode', 'GitHub', 'JSON', 'GitHub Copilot (Agent Mode)', 'Claude AI', 'Bitbucket', 'Jira', 'Confluence', 'Jenkins', 'Postman', 'Swagger/OpenAPI', 'PowerShell', 'Bash']
   }
 ];
 
