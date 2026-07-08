@@ -122,12 +122,12 @@ export const experience: readonly ExperienceEntry[] = [
     outcome:
       'Keeping production stable while incrementally moving the system toward a maintainable web-first future.',
     bullets: [
-      'Member of a small four-person team responsible for a large, complex monolithic enterprise application built on WPF and WCF with no formal documentation, learning the system from the inside out and driving improvements independently.',
-      'Played a key role in modernizing the legacy WPF/WCF platform, incrementally migrating it to a Blazor web application with a REST API layer, OAuth 2.0 security, Entity Framework ORM, and Docker-based hosting.',
-      'Architect and hands-on implementer of new REST API layer replacing WCF backend, designing endpoints, security model, and data access patterns while maintaining backward compatibility with legacy clients; set up GitHub Actions pipelines for automated build and deployment.',
-      'Own and maintain complex IIS-hosted ASP.NET MVC application supporting the existing WCF backend across Windows Server environments.',
-      'Perform SQL Server performance analysis, query optimization, and schema navigation to ensure stability across enterprise data operations.',
-      'Mentored junior developers and helped onboard and train new team members on the codebase and team practices.',
+      'Member of a small four-person team responsible for a large, complex monolithic enterprise application built on WPF and WCF with C# and .NET Framework 4.8.1, learning the system from the inside out and driving improvements independently.',
+      'Played a key role in modernizing the legacy WPF/WCF platform, incrementally migrating it to a Blazor web application with a REST API layer, OAuth 2.0 security, Entity Framework ORM, and Docker-based hosting using the latest version of C# and .NET Core 10.',
+      'Architected and implemented a new REST API layer replacing WCF backend, designing endpoints, security model, and data access patterns while maintaining backward compatibility with legacy clients; set up GitHub Actions pipelines for automated build and deployment.',
+      'Owned and maintained a complex IIS-hosted ASP.NET MVC application supporting the existing WCF backend across Windows Server environments.',
+      'Performed SQL Server performance analysis and query optimization across 100+ queries including queries reduced from 10-minute timeouts to sub-15-second execution times.',
+      'Mentored junior developers, onboarded new team members, and trained staff on modern C# and .NET Core updates.',
       'Worked with Confluence and Jira to document system architecture, API endpoints, and development processes for team knowledge sharing and onboarding.'
     ]
   },
@@ -140,7 +140,7 @@ export const experience: readonly ExperienceEntry[] = [
       'Built internal systems that improved tracking, deployment, batch processing, and support visibility across the organization.',
     outcome: 'Delivered tools that reduced operational friction and gave teams better control over daily work.',
     bullets: [
-      'Designed and built a company-wide ticketing system to create, update, and maintain change records across all organizational processes.',
+      'Designed and built a company-wide ticketing system to create, update, and maintain change records across all organizational processes in C# using .NET Framework.',
       'Designed and implemented an enterprise identity and access management system providing centralized user provisioning, authentication, and access control across multiple applications using LDAP and role-based authorization models.',
       'Engineered scalable backend processing systems supporting over 1 million student loans per month, with a focus on performance optimization, reliability, and efficient resource utilization.',
       'Built high-volume batch letter processing system using lazy-loading to ensure reliable output across large print runs.',
