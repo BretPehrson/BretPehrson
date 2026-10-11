@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Termination Appeal Report — University of Utah</title>
+  <style>
+    :root {
+      --paper: #F6F3EC;
+      --paper-raised: #FBF9F4;
+      --ink: #211D18;
+      --ink-soft: #56504A;
+      --navy: #223A5E;
+      --navy-deep: #172943;
+      --rust: #8B4A34;
+      --rust-deep: #6E3A29;
+      --line: #DCD3BF;
+      --line-soft: #E9E2D2;
+      --tab-shadow: rgba(33, 29, 24, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Source Serif Pro", "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+      font-family: "IBM Plex Mono", "SF Mono", "Cascadia Mono", Consolas, Menlo, monospace;
+    }
+
+    /* ---------- Layout shell ---------- */
+    .shell {
+      display: flex;
+      align-items: flex-start;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 64px 32px 120px;
+    }
+
+    .shell .rail {
+      flex: 0 0 250px;
+      width: 250px;
+      margin-right: 56px;
+    }
+
+    .shell main {
+      flex: 1 1 auto;
+      min-width: 0;
+      max-width: 760px;
+    }
+
+    /* ---------- Tablet / iPad layout ---------- */
+    @media (max-width: 900px) {
+      .shell {
+        display: block;
+        max-width: none;
+        padding: 0 24px 80px;
+      }
+
+      /* Compact navigation bar stays at the top while reading */
+      .shell .rail {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        width: calc(100% + 48px);
+        margin: 0 -24px 42px;
+        padding: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      /* Keep the case identification visible in a compact form */
+      .rail .case-no {
+        display: none;
+      }
+
+      .rail .case-title {
+        display: none;
+      }
+
+      /* Horizontal, swipeable navigation */
+      .rail nav {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 10px 24px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .rail nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .rail nav a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        font-size: 12px;
+        padding: 8px 10px;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        border-radius: 3px;
+      }
+
+      .rail nav a span.num {
+        margin-right: 6px;
+      }
+
+      .rail nav a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--rust);
+        background: var(--line-soft);
+      }
+
+      .rail .rail-note {
+        display: none;
+      }
+
+      .shell main {
+        max-width: 100%;
+      }
+
+      header.caption {
+        margin-bottom: 48px;
+      }
+    }
+
+    /* ---------- Phone layout ---------- */
+    @media (max-width: 600px) {
+      .shell {
+        padding: 0 16px 60px;
+      }
+
+      .shell .rail {
+        width: calc(100% + 32px);
+        margin-left: -16px;
+        margin-right: -16px;
+        margin-bottom: 36px;
+      }
+
+      .rail nav {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .rail nav a {
+        font-size: 11.5px;
+        padding: 7px 9px;
+      }
+
+      body {
+        font-size: 16px;
+      }
+
+      header.caption {
+        margin-bottom: 40px;
+        padding-bottom: 26px;
+      }
+
+      header.caption h1 {
+        font-size: 29px;
+      }
+
+      header.caption .subtitle {
+        font-size: 15px;
+      }
+    }
+
+    /* ---------- Left rail: case index ---------- */
+    .rail {
+      position: sticky;
+      top: 40px;
+      border-right: 1px solid var(--line);
+      padding-right: 28px;
+    }
+
+    .rail .case-no {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rust-deep);
+      margin-bottom: 6px;
+    }
+
+    .rail .case-title {
+      font-size: 15px;
+      color: var(--ink-soft);
+      line-height: 1.4;
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .rail nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rail nav a {
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 3px;
+      border-left: 2px solid transparent;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .rail nav a span.num {
+      color: var(--rust-deep);
+      margin-right: 8px;
+    }
+
+    .rail nav a:hover {
+      background: var(--line-soft);
+      color: var(--ink);
+    }
+
+    .rail nav a.active {
+      color: var(--navy-deep);
+      border-left-color: var(--rust);
+      background: var(--line-soft);
+      font-weight: 600;
+    }
+
+    .rail .rail-note {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Header / caption block ---------- */
+    header.caption {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    header.caption .eyebrow {
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--rust-deep);
+      margin-bottom: 14px;
+    }
+
+    header.caption h1 {
+      font-size: 34px;
+      line-height: 1.2;
+      margin: 0 0 10px;
+      font-weight: 600;
+      color: var(--navy-deep);
+    }
+
+    header.caption .subtitle {
+      font-size: 16px;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin: 0;
+    }
+
+    header.caption .meta {
+      display: flex;
+      margin-top: 22px;
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 11.5px;
+      color: var(--ink-soft);
+      flex-wrap: wrap;
+    }
+
+    header.caption .meta div {
+      margin-right: 28px;
+      margin-bottom: 8px;
+    }
+
+    header.caption .meta div span {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--rust-deep);
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+
+    /* ---------- Section content ---------- */
+    section {
+      margin-bottom: 54px;
+      scroll-margin-top: 30px;
+    }
+
+    section h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 22px;
+      color: var(--navy-deep);
+      margin: 0 0 18px;
+      font-weight: 600;
+    }
+
+    section h2 .n {
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 14px;
+      color: var(--rust);
+      font-weight: 500;
+    }
+
+    section h3 {
+      font-size: 17px;
+      color: var(--ink);
+      margin: 30px 0 12px;
+      font-weight: 600;
+      border-left: 3px solid var(--rust);
+      padding-left: 10px;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul.brief-list {
+      margin: 0 0 14px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    ul.brief-list li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 12px;
+    }
+
+    ul.brief-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--rust);
+    }
+
+    .entry-date {
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-weight: 600;
+      color: var(--navy-deep);
+      font-size: 14px;
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: 0.01em;
+    }
+
+    .entry {
+      margin-bottom: 20px;
+      padding-left: 16px;
+      border-left: 1px solid var(--line);
+    }
+
+    .note-box {
+      background: var(--paper-raised);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--navy);
+      padding: 14px 18px;
+      font-size: 15.5px;
+      color: var(--ink-soft);
+      margin: 18px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ---------- Exhibit tabs (inline citation) ---------- */
+    .ex-tab {
+      display: inline-flex;
+      align-items: center;
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--rust-deep);
+      background: #F0E4D5;
+      border: 1px solid #D8C39E;
+      border-bottom-width: 2px;
+      padding: 1px 7px 2px;
+      border-radius: 3px 3px 2px 2px;
+      text-decoration: none;
+      vertical-align: 2px;
+      margin: 0 1px;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .ex-tab:hover {
+      background: #E5D2B4;
+      transform: translateY(-1px);
+    }
+
+    /* ---------- Action & Back links ---------- */
+    .exhibit .action-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .exhibit .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 11.5px;
+      color: var(--rust-deep);
+      text-decoration: none;
+      padding: 5px 9px;
+      border-radius: 4px;
+      background: #F0E4D5;
+      border: 1px solid #D8C39E;
+      transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+    }
+
+    .exhibit .back-link:hover {
+      background: #E5D2B4;
+      color: var(--navy-deep);
+      transform: translateY(-1px);
+    }
+
+    :target {
+      scroll-margin-top: 60px;
+    }
+
+    .ex-tab:target,
+    .exhibit:target,
+    li:target,
+    .entry:target {
+      animation: highlight-pulse 2.5s ease-out;
+    }
+
+    @keyframes highlight-pulse {
+      0% {
+        background-color: rgba(139, 74, 52, 0.22);
+        border-radius: 3px;
+      }
+
+      100% {
+        background-color: transparent;
+      }
+    }
+
+    /* ---------- Exhibits appendix ---------- */
+    .exhibit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .exhibit {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .exhibit .tab-badge {
+      flex: 0 0 56px;
+      width: 56px;
+      margin-right: 18px;
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--paper-raised);
+      background: var(--navy);
+      text-align: center;
+      padding: 8px 0;
+      border-radius: 3px 3px 8px 8px;
+      box-shadow: 0 2px 0 var(--tab-shadow);
+    }
+
+    .exhibit .details {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .exhibit .details h4 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .exhibit .details p {
+      margin: 0 0 10px;
+      font-size: 14.5px;
+      color: var(--ink-soft);
+    }
+
+    .exhibit .file-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 12.5px;
+      color: var(--navy-deep);
+      text-decoration: none;
+      border: 1px dashed #B8AF9C;
+      padding: 6px 10px;
+      border-radius: 4px;
+      background: var(--paper-raised);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .exhibit .file-link:hover {
+      border-color: var(--rust);
+      color: var(--rust-deep);
+      border-style: solid;
+    }
+
+    .exhibit .file-link::before {
+      content: "📎";
+      font-size: 12px;
+    }
+
+    .exhibit .filename-hint {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      color: #8A8377;
+    }
+
+    /* ---------- Setup instructions banner ---------- */
+    .setup-banner {
+      background: var(--paper-raised);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      font-size: 14.5px;
+      color: var(--ink-soft);
+    }
+
+    .setup-banner strong {
+      color: var(--ink);
+    }
+
+    .setup-banner .path {
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      background: var(--line-soft);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+      color: var(--navy-deep);
+    }
+
+    /* ---------- Questions list ---------- */
+    #questions {
+      width: 100%;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 24px;
+    }
+
+    ol.questions {
+      margin: 10px 0;
+      padding-left: 40px;
+    }
+
+    ol.questions li {
+      margin-bottom: 14px;
+      padding-left: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    ol.questions li::marker {
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      color: var(--rust-deep);
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      #questions {
+        padding: 0 8px;
+      }
+
+      ol.questions {
+        padding-left: 28px;
+      }
+
+      ol.questions li {
+        padding-left: 8px;
+      }
+    }
+
+    footer {
+      margin-top: 60px;
+      /* padding-top: 24px; */
+      /* border-top: 1px solid var(--line); */
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 11px;
+      color: #9A9384;
+      text-align: center;
+    }
+
+    /* ---------- Exhibit Modal Overlay ---------- */
+    .ex-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(23, 41, 67, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .ex-modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .ex-modal {
+      background: var(--paper-raised);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      width: 90%;
+      max-width: 960px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      transform: translateY(16px);
+      transition: transform 0.2s ease;
+    }
+
+    .ex-modal-backdrop.open .ex-modal {
+      transform: translateY(0);
+    }
+
+    .ex-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--navy-deep);
+      color: var(--paper);
+    }
+
+    .ex-modal-header h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--paper);
+      border-left: none;
+      padding-left: 0;
+      font-family: "IBM Plex Mono", Menlo, monospace;
+    }
+
+    .ex-modal-close {
+      background: transparent;
+      border: none;
+      color: var(--paper);
+      font-size: 24px;
+      cursor: pointer;
+      padding: 2px 8px;
+      line-height: 1;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    .ex-modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .ex-modal-body {
+      flex: 1 1 auto;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 350px;
+      background: var(--paper);
+    }
+
+    .ex-modal-body img {
+      max-width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .ex-modal-body iframe {
+      width: 100%;
+      height: 70vh;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: white;
+    }
+
+    .ex-modal-body audio {
+      width: 100%;
+      max-width: 550px;
+      margin: 40px 0;
+    }
+
+    .ex-modal-footer {
+      padding: 10px 20px;
+      background: var(--paper-raised);
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "IBM Plex Mono", Menlo, monospace;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .ex-modal-footer a {
+      color: var(--navy-deep);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    @media print {
+      .rail {
+        display: none;
+      }
+
+      .shell {
+        grid-template-columns: 1fr;
+        display: block;
+        padding: 0 20px;
+      }
+
+      .ex-tab,
+      .file-link {
+        border: 1px solid #999;
+      }
+
+      body {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <nav id="railNav">
+        <a href="#purpose"><span class="num">01</span>Purpose</a>
+        <a href="#background"><span class="num">02</span>Background</a>
+        <a href="#classification"><span class="num">03</span>Classification &amp; Pay</a>
+        <a href="#appeal-summary"><span class="num">04</span>Appeal Summary</a>
+        <a href="#shane-record"><span class="num">05</span>Factual Record Regarding Shane Washburn’s Allegations</a>
+        <a href="#diego-stewardship"><span class="num">06</span>Diego Reports &amp; Timing of Shane's Allegations</a>
+        <a href="#prior-discipline"><span class="num">07</span>Prior Discipline, University
+          Policy, and the Progression to Termination</a>
+        <a href="#appeal-grounds"><span class="num">08</span>Appeal
+          Grounds</a>
+        <a href="#exhibits"><span class="num">09</span>Exhibits</a>
+      </nav>
+    </aside>
+
+    <main>
+      <header class="caption">
+        <h1>Termination Fact Review</h1>
+      </header>
+
+      <section id="purpose">
+        <h2><span class="n">01</span>Purpose of This Document</h2>
+        <p>This is a comprehensive summary of the events leading to my termination from the University of Utah, and
+          everything that has happened since. It draws on my own written reports, notes, and recollections. Specific
+          figures, names, and dates should be verified against underlying records, GRAMA production, recordings, emails,
+          and HR correspondence once available. Clickable exhibit tabs point to the supporting documents referenced
+          throughout.</p>
+      </section>
+
+      <section id="background">
+        <h2><span class="n">02</span>Background</h2>
+        <p>After working for the University for 17+ years with never having any prior disciplinary actions on my record,
+          I was terminated in June 2026. This document provides a detailed review of the circumstances leading to my
+          termination and the events that followed because I know friends that I worked with want to know what happened.
+        </p>
+      </section>
+
+      <section id="classification">
+        <h2><span class="n">03</span>Job Title Classification</h2>
+        <p>This section does not pertain to my termination but it does bring up questions about my treatment compared to
+          similarly situated peers. It makes me question if Reza was never going to give me a fair investigation
+          into allegation that were brought up against me if I was not treated fairly with the job title
+          reclassification.</p>
+        <ul class="brief-list">
+          <li>When the job title reclassification occurred, five peers who held my identical prior title ("Software
+            Design Engineer Sr," grade G) were all reindexed
+            to "P24/IT Software Engineer V" or "P24/IT Software Developer V". 2 others were at the same level with a
+            different job title of "Web Software Developer Senior" that were also reclassified to "P24/IT Software
+            Developer V". I was placed at "P22/IT Software Developer IV" — the same outcome as employees with lower
+            prior grades and non-senior titles. <a class="ex-tab" href="#job-classification">Job classification</a>
+            There were no other employees with my prior title who were reclassified to a lower level. </li>
+          <li>We received an email from the department on or around October 16, 2026, with the updated job title. I no
+            longer have access to this email showing what my new job title is but the job title can be seen in my
+            employment verification letter at empinfo.com <a class="ex-tab" href="#employment-verification">Employment
+              verification</a></li>
+          <li>When I asked Reza in December 2025 why Aubrey Schrag was classified at Level V, he replied
+            stating that difference came down to degree and years of service, though I don't know whether that reflects
+            the University's actual stated criteria. Aubrey and I had the same C.S. degree from Neumont University and
+            and I have 1 more year of service at the University of Utah. We held the same job title prior to the
+            reclassification and did the same job. </li>
+          <li>Later that month, I asked Reza about the difference in job title and the difference in salary and asked if
+            Aubrey was promoted. He replied with, "Something like that".</li>
+          <li>I have a retained Microsoft Teams message from Reza, sent in January 2026: "I started the process to get
+            you a bump, don't tell anyone." <a class="ex-tab" href="#reza-message-pay-bump">Pay-bump Teams message</a> I
+            read this as Reza acknowledging my classification wasn't right and trying to informally correct it. </li>
+        </ul>
+        <div class="note-box">I want to be careful not to overstate this: I don't have proof that Reza discriminated
+          against me. My honest view is that he was not well-prepared for a managerial role and made a number of
+          mistakes, several of which I've been able to document — but the classification discrepancy is, at this point,
+          an open question rather than a proven claim.</div>
+      </section>
+
+      <section id="appeal-summary">
+        <h2><span class="n">04</span>Appeal Summary</h2>
+        <p>This appeal concerns the University’s decision to terminate my employment on June 9, 2026, after more than 17
+          years of service and without prior disciplinary action on my record.</p>
+        <p>I acknowledge that certain conduct discussed during the University’s April 2026 investigation was
+          inappropriate. I do not contend that the conduct should simply be disregarded. The issue presented by this
+          appeal is different: whether the University fairly and accurately evaluated that conduct, followed its
+          disciplinary procedures, and had a sufficient basis to impose termination after the same conduct had already
+          resulted in a verbal warning and additional sexual-harassment training on April 29, 2026.</p>
+        <p>The University’s June 9 termination letter is particularly significant because it states that my termination
+          was based “solely” on two matters arising from the April investigation. Those matters had already been
+          addressed on April 29.</p> <a class="ex-tab" href="#termination-letter">Termination Letter</a>
+        <p>The central factual issue for this appeal is therefore not whether I exercised perfect judgment. I
+          acknowledge that I did not. The issue is whether the University accurately understood what occurred, including
+          the circumstances surrounding the interactions, the nature of the communications between Shane Washburn and
+          me, what Diego Andino actually knew firsthand, and the basis for attributing particular intent to me.</p>
+        <p>The evidence contains material information that was capable of testing the characterization of these
+          interactions. That evidence includes Teams communications, the April 27 interview recordings, and
+          communications concerning my prior reports to management. The evidence does not establish that every statement
+          Shane made was false, but it does establish factual disputes that should be considered when evaluating the
+          seriousness and meaning of the conduct.</p>
+        <p>The appeal should therefore distinguish between the conduct I acknowledge and the broader narrative used to
+          characterize that conduct. I am asking the reviewing manager to evaluate the complete factual record rather
+          than treating disputed interpretations of intent or secondhand accounts as established facts.</p>
+      </section>
+
+      <section id="shane-record">
+        <h2><span class="n">05</span>Factual Record Regarding Shane Washburn’s Allegations</h2>
+        <p>The following are the recordings made by Reza of the investigation. He recorded his meeting with me, Shane
+          and Diego.</p><a class="ex-tab" href="#reza-interview-diego">Reza Interview with Diego</a><a class="ex-tab"
+          href="#reza-interview-bret">Reza Interview with Bret</a><a class="ex-tab" href="#reza-interview-shane">Reza
+          Interview with Shane</a><br><br>
+        <p>After listening to the recording of Shane Washburn’s April 27, 2026 interview, I identified several
+          statements that I believe mischaracterize my interactions with him or omit important context. I am not
+          asserting that every statement Shane made was false. Rather, I believe the recording demonstrates that
+          important portions of his account were very different from my recollection and from communications between
+          Shane and me.</p>
+        <p>This is particularly significant because the University ultimately relied on the April 22, 2026 incident and
+          the prior bathroom incident as the sole basis for my termination. The University’s June 9 termination
+          memorandum states that the decision was based solely on the conduct I admitted to.</p>
+        <h3>I- Shane’s characterization of my conversation with him regarding Diego and Reza</h3>
+        <div class="entry"><span class="entry-date">0:38–1:20 of Shane's recording</span></div>
+        <p>Shane stated that I asked him to come to my desk and told him that I had overheard Reza discussing Diego and
+          Diego’s performance. I did message Shane and tell him to come to my desk. In my interview with Reza at 6:38, I
+          stated that I messaged Shane and told him to come to my desk when he has a minute. I explained to Reza that I
+          intended to give Shane a warning that he should be in the office between 9:00 am and 3:00 pm. That is not what
+          I
+          recall telling Shane. I told Shane that I had overheard Reza
+          discussing Shane and Shane’s performance, not Diego’s. I also told Shane that I understood Reza was monitoring
+          attendance and performance within the team. Reza had asked me to provide information regarding employees’
+          attendance and
+          presence in the office: <a class="ex-tab" href="#reza-message-proof">Reza request for evidence</a><a
+            class="ex-tab" href="#reza-message-headcount">Reza head-count request</a><a class="ex-tab"
+            href="#reza-message-report-gis">Reza request regarding GIS arrivals</a></p>
+        <p>At 6:38 of the recording of my interview, I explained that I was going to give Shane a warning letting him
+          know that he should be in the office between 9:00 am and 3:00 pm because I have heard things. I told Reza in
+          my interview at 6:53 that I didn't want to tell him who said what or where it has come from. I said that to
+          Reza
+          because Reza knows that we have been disucssing Shane's attendance already. Reza and I had talked about how
+          often Shane calls in sick or uses vacation time. One day I asked Reza how he, as well as a few others on the
+          team, have any sick time at all with as much as they take. Reza and I went to Reza's desk one day and opened
+          Kronos and looked up Shane's available time and how much he has used. We also looked at Michael Andrade's
+          and Keegan Spencers Kronos times. Reza was shocked when he looked at my time and saw that I had over 1000
+          hours of sick time. </p>
+        <p>My knowledge regarding Diego’s performance concerns did not come solely from something I had overheard. On
+          January 12, 2026, I reported concerns regarding Diego’s work activity to Suzanne Wayment
+          and provided supporting information. <a class="ex-tab" href="#suzanne-meeting-request">January 12 Suzanne
+            meeting/report</a></p>
+        <p>I subsequently communicated with Suzanne about whether the situation had improved. On
+          April 8, 2026, Suzanne asked whether anything had changed, and after I told her the behavior had resumed, she
+          stated that she would “raise the issue again.” <a class="ex-tab" href="#suzanne-diego-followup">April 8
+            Suzanne communication</a></p>
+        <p>I believe this context is important because Shane’s account could leave the impression that I was improperly
+          monitoring or discussing coworkers without any basis. In reality, I had previously been asked by my manager to
+          provide information concerning attendance and work activity, and I had separately raised concerns regarding
+          Diego through management channels.</p>
+        <h3>II- Shane’s allegation that I came into the office when nobody was there so that I could sit with my pants
+          off</h3>
+        <div class="entry"><span class="entry-date">3:10–3:50 of Shane's recording</span></div>
+        <p>Shane stated that I sometimes came into the office when no one else was present so that I could sit at my
+          desk without pants. That is false.</p>
+        <p>I sometimes worked from the office on days when I was otherwise scheduled to work from home. I live
+          approximately one block from the office in a small studio apartment with my partner, and I preferred the
+          office environment because I had a dedicated workspace and a large monitor there. The office is not empty on
+          Thursdays, there were many members of management in the office and a lot of people walking around.</p>
+        <p>I had even made reference to working in the office so I could have a desk to work at to Reza in December of
+          2025. <a class="ex-tab" href="#work-in-office">Working In Office</a>
+        <p>There was no connection between my decision to work from the office and any desire to be undressed. I believe
+          this statement is important because it presents an ordinary work practice as evidence of a sexual motive that
+          did not exist.</p>
+        <h3>III- Shane’s statement that he told me he was not interested in that behavior</h3>
+        <div class="entry"><span class="entry-date">3:55 of Shane's recording</span></div>
+        <p>Shane stated that he told me he “wasn’t into that” and that he particularly was not interested in that
+          behavior at work. I do not recall Shane ever telling me this.</p>
+        <p>Instead, Shane had repeatedly made jokes with me about working without pants. He had told me on multiple
+          occasions that he did not see the need to come into the office when he could work from, on his couch, in
+          his underwear. This became an ongoing joke between us after he initiated the communication around working in
+          his underwear. I told Reza this in my interview at 6:06 of my recording.</p>
+        <p>There is also a Teams communication in which Shane and I discussed not wearing pants in the office and he
+          stated, “why would that bother anyone?” <a class="ex-tab" href="#shane-no-pants-chat">Teams communication
+            about wearing pants</a></p>
+        <p>I am not presenting this communication as proof that Shane was required to be comfortable with my conduct.
+          Rather, it demonstrates that the subject of working without pants was an established subject of joking between
+          us and that Shane’s April 27 characterization that he had clearly and previously communicated that this
+          subject was unwelcome does not match the previous communications between us. </p>
+        <h3>IV- Shane’s allegations of suggestive comments and the surrounding context</h3>
+        <div class="entry"><span class="entry-date">3:55–4:45 of Shane's recording</span></div>
+        <p>Shane stated that I had made suggestive comments toward him and said that he suspected I was “trying to
+          entice” him. However, when asked about these statements, Shane acknowledged, at 4:35 in his recorded
+          interview,
+          that he had no proof, no witnesses, and had never previously reported these alleged comments. He described
+          them as essentially one person’s word against another.</p>
+        <p>This distinction is important because Shane’s conclusion that I was attempting to “entice” him was his
+          interpretation of my intentions, rather than an identified statement or action demonstrating that intent. The
+          interview does not identify a specific prior statement, witness, recording, or other corroborating evidence
+          supporting that interpretation.</p>
+        <p>There was also relevant sexual context between Shane and me that was not reflected in his characterization of
+          our interactions. On an earlier occasion, Shane approached me about the Grindr app and asked me if I knew why
+          he would be banned from using it. He told me that his friend had just come out as bisexual and Shane was
+          planning a sex party at his home and wanted to invite a gay man to have sex with his friend. He initially
+          asked whether I knew a gay man on Grindr who might attend and have sex with his friend. Several weeks later,
+          after telling me he had not been successful in finding someone, Shane asked whether I would be interested in
+          attending and having sex with his friend because he thought it would be beneficial for his friend to have his
+          first experience with an experienced gay man.</p>
+        <p>I was uncomfortable with the proposition and subsequently told Keegan Spencer, who reports to Reza, about the
+          interaction. I also disclosed the incident to Reza during my April 27 interview at 13:00 of my recorded
+          interview. This does not establish that I had consent to make sexual comments toward Shane or that any
+          particular conduct was appropriate. It is relevant because it provides context for the sexual nature of some
+          of our conversations and demonstrates that sexual subject matter was not exclusively initiated by me.</p>
+        <p>There are also Teams communications in which Shane himself introduced or participated in
+          explicitly sexual subject matter: (FYI: Understall is a term used in our communications to refer to a
+          specific type of gay porn)</p>
+        <p><a class="ex-tab" href="#shane-inseminating-chat-1">Insemination message</a> <a class="ex-tab"
+            href="#shane-inseminating-chat-2">Larger view of insemination message</a> <a class="ex-tab"
+            href="#shane-understall-chat">“Glory Hole” / “Understall” message</a> <a class="ex-tab"
+            href="#shane-oral-chat">“Oral” message</a></p>
+        <p>These communications are important because they are evidence of how Shane and I communicated
+          with one another. They are not based solely on my recollection or on a third party’s account. They demonstrate
+          that Shane himself participated in sexual subject matter before the April 27 investigation. And as you can
+          see in these messages, they were initiated by Shane out of nowhere without conversations leading up to
+          the messages he sent.</p>
+        <p>I am not arguing that Shane’s participation in sexual conversations gave me permission to engage in any
+          particular conduct, or that it made my conduct appropriate. Rather, these communications are relevant to
+          whether Shane’s later characterization of our interactions as a one-sided pattern of unwanted sexual attention
+          accurately reflects the relationship that existed before the investigation.</p>
+        <p>In particular, Shane’s statement that he believed I was “trying to entice” him should be considered alongside
+          the communications between us. The evidence shows that sexual subject matter was not
+          exclusively initiated by me and that Shane himself participated in conversations of a sexual nature. The
+          appeal should therefore consider these communications when evaluating the accuracy and context of Shane’s
+          later characterization of our interactions.</p>
+        <h3>V- Diego’s April 27 interview and the secondhand nature of the allegations</h3>
+        <div class="entry"><span class="entry-date">10:36 of Shane's' recording</span></div>
+        <p>Shane's April 27 interview also raises an important issue concerning how the allegations came to Diego. Shane
+          and Diego only knew of each other in the office and had never spoken or had regular interaction. Though Shane
+          contacted Diego and spoke with him by phone about the allegations involving me. At 10:36 of Shane's
+          interview, he told Reza, "Like I've never talked to Diego before that was like my first interaction with him."
+        </p>
+        <p>This is significant because Diego was not an eyewitness to the conduct at issue. His knowledge of the
+          allegations came from Shane, who approached him and provided his account of what had occurred. During Diego's
+          April 27 interview, Diego described the pants incident as “what Shane told me, verbatim,” and later summarized
+          his understanding by stating, “that's pretty much what Shane told me.” Diego also asked whether there might be
+          camera footage that could substantiate what Shane had reported.</p>
+        <p>Diego's belief in the allegations was likewise not based on personal observation. During the interview, Diego
+          explained that he believed Shane's account in part because the allegations were so serious that he did not
+          think Shane would have a reason to fabricate them. In other words, Diego's belief that the conduct occurred
+          was based on his assessment of Shane's credibility and the seriousness of the allegations, rather than on
+          firsthand knowledge or identified independent evidence.</p>
+        <p>There is also an important distinction in Diego's interview concerning other information Shane had provided
+          to him. Diego stated that the first part of what Shane told him, concerning Diego himself, “doesn't seem
+          accurate,” while accepting the allegations concerning me as credible. I am not suggesting that this proves
+          Shane fabricated the allegations. Rather, it demonstrates that Diego was capable of recognizing that
+          information provided by Shane could be inaccurate, while accepting other information from Shane without
+          independently verifying it.</p>
+        <p>This distinction is important when evaluating the evidence presented to the University. There is a meaningful
+          difference between an allegation being reported, another person accepting that allegation as credible, and
+          independent evidence corroborating the underlying events. Diego's April 27 recording establishes that his
+          information concerning the incidents came from Shane rather than from his own observation.</p>
+        <p>This does not necessarily establish that Shane's account was false, nor does it mean that Diego was acting
+          improperly by believing what Shane told him. It does, however, mean that Diego's account should not be treated
+          as independent confirmation of the underlying conduct simply because Diego ultimately reported the
+          allegations. The source of the information, the distinction between firsthand and secondhand knowledge, and
+          the extent to which the allegations were independently verified are important considerations in evaluating the
+          reliability and completeness of the evidence presented to the University.</p>
+        <p>Diego’s account should therefore be distinguished from firsthand evidence. Diego did not witness either of
+          the incidents he described. His knowledge of the alleged conduct came from Shane, and Diego acknowledged
+          during his April 27 interview that he was recounting what Shane had told him. His account may be relevant to
+          establish what Shane reported to him, but it does not independently establish that the events occurred in the
+          manner Diego described or corroborate Shane’s characterization of those events. This distinction is
+          particularly important where the University relied on Diego’s account in evaluating the allegations.</p>
+        <h3>VI- The March 6, 2024 bathroom incident</h3>
+        <div class="entry"><span class="entry-date">5:40 of recording with Shane; 10:39 of recording with Bret</span>
+        </div>
+        <p>Reza raised the prior bathroom incident and asked Shane about it. Shane said, “I’ll just skip that one unless
+          there are repercussions for me not talking about it.”</p>
+        <p>The incident occurred on March 6, 2024 and for some reason, I am the only person who knew when it happened.
+        </p>
+        <p>The circumstances surrounding this incident are very different from the story that Shane told Diego. Since
+          Shane did not provide his account of the incident during Reza’s interview, Reza could only evaluate the
+          allegation using secondhand information and my account of what occurred.</p>
+        <p>On March 4, 2024, Shane told me in the break room that he wore a butt plug and sometimes put one in before
+          coming to work and wore it throughout the day. We discussed an item that I have, which was a black rubber
+          gothic bracelet I bought at Hot Topic. I told Shane that I used it once around my testicles and he wanted to
+          know
+          more and see what I meant. He asked me to bring it into the office and show him. Reza refers to the item as an
+          Adult Item, but it was a bracelet.</p>
+        <p>On March 6, after I was done working, I told Shane that I was going to the restroom. I did not force or
+          coerce
+          him to accompany me. Shane got up from his desk, walked down the hall and came into the restroom voluntarily
+          and used the urinal next to me. Just as Shane looked over at me, the door opened and the interaction ended.
+        </p>
+        <p>I acknowledge that I knew Shane was likely to look over at me, and I have never denied that. My position has
+          consistently been that the interaction arose from a prior personal and sexual conversation between Shane and
+          me.
+          Shane had asked to see the item and had previously expressed interest in what it looked like when worn. I did
+          not understand the interaction at the time to be a non-consensual or unwanted sexual advance.</p>
+        <p>Importantly, I also described the underlying circumstances during my April 27 interview with Reza, before
+          this
+          appeal was prepared. At approximately 10:39 of the recording, I explained that Shane had asked me to bring the
+          item into the office, that I showed it to him, that he saw what the item looked like, and that he then asked
+          what
+          it looked like when worn. Reza's follow-up questions and summary of my explanation reflect that he understood
+          the
+          incident as a demonstration of the item after Shane had expressed interest in it. I did not describe the
+          incident
+          to Reza as an unsolicited act of exposing myself to Shane. I never said that I was "demonstrating" the item,
+          those
+          were Reza's words.</p>
+        <p>There is evidence immediately surrounding the incident. After I left the restroom, Shane and I continued
+          communicating on Teams. <a class="ex-tab" href="#shane-bathroom-chat">Teams communications immediately before
+            and after the March 6 incident</a></p>
+        <p>In this communication, Shane responded to my message with a joke about “seeing the future.” When I replied
+          that there was more that he saw, Shane responded with a smiling/winking emoji.</p>
+        <p>I recognize that a later response by Shane does not necessarily establish what he subjectively felt during
+          the incident. However, it is relevant evidence concerning how Shane characterized and responded to the
+          interaction,
+          particularly when compared with the much more serious characterization presented more than two years later
+          after he found out I had reported his attendance issues to management.</p>
+        <p>There is also an important discrepancy concerning what Shane told Diego about this incident. During Diego's
+          April 27 interview, Diego stated that Shane told him that I had shown Shane my genitals and “started shaking
+          them and smiling at him.” That is not what happened.</p>
+        <p>The circumstances were that Shane had previously discussed the subject with me, asked to see the item I had
+          discussed with him, came into the restroom voluntarily after I told him I was going there, and then continued
+          communicating with me afterward. The April 27 recording of my interview with Reza also confirms that I
+          provided
+          substantially this same explanation during the original investigation. I acknowledge the conduct that
+          occurred,
+          but I dispute the characterization of that conduct as an unsolicited act of sexual exposure and believe the
+          complete context should be considered when evaluating the seriousness and meaning of the incident.</p>
+        <h3>VII - April 22 Not wearing pants</h3>
+        <p>At 4:53 of my recorded interview, I told Reza that Shane and I had been talking near the break room at
+          approximately 2:30 that afternoon and that the conversation was personal in nature. I explained that Shane
+          was complaining about being in the office and, at approximately 6:12 of the recording, I described how he said
+          he would rather be at home in his underwear. I then told Reza that I joked about being able to do the same
+          thing
+          in the office. I did not mention it to Reza at that point, but Shane responded, “I think I’m just going to go
+          home instead, but feel free to, you’ll be the only person here.” I recognize that this statement was not
+          permission for me to remove my pants. However, it is important context for the specific incident that occurred
+          later that afternoon.</p>
+        <p>At 7:28 of my recording, I explained that I thought it would be funny if I was in my underwear when Shane
+          arrived at my desk. I did not describe this to Reza as a sexual act or as an attempt to expose myself to
+          Shane.
+          Shane and I had discussed the subject of being without pants in the office only approximately 30 minutes
+          earlier,
+          and Shane himself had responded to my joke by saying that I could “feel free to” do so. I therefore dispute
+          the
+          later characterization of the incident without this immediate context. When Shane described the incident at
+          7:42
+          of his recorded interview, he stated, “I prefer for, if a coworker wants to talk to me that they're wearing
+          their
+          clothes when I get there.” His statement describes his preference concerning how I should have been dressed,
+          but it does not address the conversation we had approximately 30 minutes earlier or the context in which the
+          later interaction occurred.</p>
+        <p>I am not suggesting that our earlier conversation gave me permission to engage in that conduct. Rather, it is
+          relevant to how the later interaction should be characterized. The evidence shows that the subject of being
+          without pants had been discussed between Shane and me shortly beforehand and that I told Reza during the
+          original investigation that my intent was to make a joke, not to engage in a sexual act or intentionally
+          expose myself to Shane. And Shane had previously told me in a Teams chat, "Why would that bother anyone".</p>
+        <h3>VIII- Shane’s statement that he had been documenting coworkers’ conduct</h3>
+        <div class="entry"><span class="entry-date">7:18 of recording</span></div>
+        <p>Shane stated that he had not been recording incidents involving coworkers. However, on April 22, 2026, Shane
+          told me that he believed he had been underpaid for years and intended to take action. He told me that he had
+          been maintaining a spreadsheet documenting incidents involving coworkers and that he was compiling information
+          that he could use to “take people down.” I reported this to Reza on April 29, 2026.</p>
+        <p>I believe this statement is relevant to evaluating the reliability and context of the allegations Shane
+          subsequently made.</p>
+        <p>I am not asking you to assume that Shane fabricated allegations simply because he maintained
+          such a spreadsheet. Rather, I believe the University should consider whether his stated practice of
+          documenting coworkers’ conduct, combined with the discrepancies between his April 27 account and our
+          communications, warrants closer scrutiny of his allegations.</p>
+      </section>
+
+      <section id="diego-stewardship">
+        <h2><span class="n">06</span>Reporting History Concerning Diego and the Timing of Shane’s Allegations</h2>
+        <p>Section 5 describes discrepancies between Shane’s April 27 account and the available evidence, this section
+          provides the relevant chronology concerning my reports about Diego and the events that followed.</p>
+        <h3>My Reports About Diego Predate the April 22 Conversation</h3>
+        <p>For more than two years, I raised concerns about Diego Andino's work activity through management channels. I
+          documented repeated instances in which I observed him away from University work for extended periods while
+          apparently working for another employer, including from his University workstation. I provided information and
+          supporting evidence to management on multiple occasions. <a class="ex-tab" href="#diego-second-job-photos">
+            Diego second-job photos</a><a class="ex-tab" href="#diego-reports-to-reza">Reports to Reza</a></p>
+        <p>On January 12, 2026, I raised these concerns with Suzanne Wayment, and provided supporting
+          information. I went to Suzanne for advice since we worked closely with her on our project and she could help
+          me
+          determine who to talk to.On April 8, 2026, Suzanne followed up with me regarding whether the situation had
+          improved. I told her that the behavior had resumed, and she stated that she would “raise the issue again.”</p>
+        <a class="ex-tab" href="#suzanne-meeting-request">January 12 Suzanne communication</a>
+        <a class="ex-tab" href="#suzanne-diego-followup">April 8 Suzanne communication</a>
+        <p>These reports therefore predated the events that ultimately resulted in the disciplinary process against me.
+        </p>
+        <h3>April 22, 2026 - I Told Shane About My Reports to Management</h3>
+        <p>On April 22, I told Shane that I had previously raised concerns about Diego with Reza and had escalated those
+          concerns to management. I also told Shane that I understood Reza to be monitoring attendance and performance
+          within the team.</p>
+        <p>The timing of what followed is significant.</p>
+        <p>Before this conversation, Shane and I had engaged in conversations that included sexual subjects and joking.
+          As described in Section 5, Shane had participated in jokes concerning working without pants, had discussed
+          sexual subjects with me, had invited me to a sex-related gathering, and had sent messages containing sexual
+          subject matter. I had not previously received a communication from Shane stating that these subjects were
+          unwelcome.</p>
+        <p>After April 22, the characterization of these interactions changed substantially.</p>
+        <h3>Change in the Characterization of My Interactions With Shane</h3>
+        <p>Shane did not report the April 22 conversation or the prior interactions directly to management at that time.
+          Instead, he contacted Diego, with whom he had not previously had a regular relationship, and discussed my
+          conduct with him.</p>
+        <p>During Shane's April 27 interview, he described our prior interactions as unwanted sexual attention and
+          stated that he believed I was attempting to “entice” him. He did not identify a witness, recording, written
+          communication, or other independent evidence establishing that I had intended to engage in the conduct he
+          described.</p>
+        <p>This represented a significant change from the communications and interactions that had occurred before April
+          22, especially since he had actively engaged in sending sexually suggestive message to me.</p>
+        <p>I acknowledge that some of my conduct was inappropriate and that the University was entitled to address it.
+          My concern is narrower: whether the surrounding circumstances and the change in characterization were
+          adequately considered when the University evaluated my conduct.</p>
+        <h3>The Timing of These Events</h3>
+        <p>The sequence is:</p>
+        <ul>
+          <li>Before April 22, I had previously raised concerns about Diego through management channels on January
+            12 and April 8.</li>
+          <li>Before April 22, Shane had engaged in sending me sexually suggestive messages in Teams</li>
+          <li>April 22, I told Shane that I had reported concerns about Diego to management and that I understood
+            Reza to be monitoring Shane's attendance and performance.</li>
+          <li>April 23, Shane described prior interactions between us to Diego in substantially different terms.</li>
+          <li>April 24, Diego, who had not witnessed the underlying incidents, then became involved in communicating
+            those allegations to management.</li>
+          <li>April 27, Reza interviewed Diego, Shane and me as part of an investigation to get the facts behind the
+            allegatoins.</li>
+          <li>April 28, Reza met with Doug Kenner to discuss the allegations and determine appropriate disciplinary
+            action.</li>
+          <li>April 29, I received a verbal warning and additional sexual-harassment training.</li>
+        </ul>
+        <p>I am not asking for a determination of motive based solely on timing. I am asking that this
+          chronology be considered together with the underlying communications, interview recordings, and reporting
+          history.</p>
+        <h3>Sexual Orientation and the Characterization of the Interactions</h3>
+        <p>There is an additional circumstance that I believe should be preserved in the factual record.</p>
+        <p>Shane knew that I am gay. The interactions between Shane and me included sexual subject matter that was, at
+          various times, initiated or participated in by Shane. After April 22, those prior interactions were
+          characterized substantially differently, including as evidence that I had been directing unwanted sexual
+          attention toward him.</p>
+        <p>I cannot know what motivated Shane's change in characterization. I also do not ask that you
+          make a finding about his motives.</p>
+        <p>I believe, however, that the record should reflect that my sexual orientation was known to Shane, that the
+          prior communications included sexual subject matter initiated or participated in by both of us, and that the
+          characterization of those interactions changed shortly after I told Shane about my reports to management.</p>
+        <p>Those facts are relevant to understanding the complete circumstances surrounding the allegations and the
+          subsequent disciplinary process.</p>
+      </section>
+
+      <section id="prior-discipline">
+        <h2><span class="n">07</span>Prior Discipline, University Policy, and the Progression to Termination</h2>
+        <p>The April 29, 2026 verbal warning is an important part of the disciplinary history underlying my termination.
+          The University had completed its investigation into the conduct identified during the April investigation
+          and imposed corrective action rather than termination.</p>
+        <p>On April 29, Reza told me that he had completed his investigation and had discussed the incidents with
+          Doug Kenner. He explained that he did not believe I had acted intentionally and that, in their view, a verbal
+          warning and additional sexual-harassment training would be sufficient corrective action.</p>
+        <p><a target="_blank" href="https://regulations.utah.edu/human-resources/rules/r5-111a.php">Rule 5-111A —
+            Corrective and Progressive Discipline</a></p>
+        <p>Rule 5-111A is relevant to evaluating the progression from the April 29 verbal warning to the June 9
+          termination. I understand the policy to provide a framework for corrective and progressive discipline. The
+          appeal should therefore consider how the University moved from the corrective action imposed on April 29 to
+          termination approximately six weeks later, particularly where the June 9 termination memorandum states that
+          the termination was based solely on conduct addressed during the April investigation.</p>
+        <p>A subsequent allegation in May resulted in additional investigation and disciplinary proceedings, but I
+          understand that allegation was not substantiated. If that allegation was not ultimately established, the
+          appeal should consider what new substantiated conduct, if any, justified moving from the April 29 corrective
+          action to termination on June 9.</p>
+        <p>My concern is not that the University lacked authority to impose discipline. I acknowledge that some of
+          my conduct was inappropriate and that corrective action was warranted. The issue is whether the complete
+          factual record supports the significant change in discipline from a verbal warning and training on April
+          29 to termination on June 9.</p>
+      </section>
+
+      <section id="appeal-grounds">
+        <h2><span class="n">08</span>Appeal Grounds</h2>
+        <p>The factual record regarding Shane’s allegations should be considered first because the University’s June 9
+          termination letter states that termination was based “solely” on the admitted April conduct. The questions
+          below are therefore directed at the factual basis and evaluation of that conduct, rather than asking
+          to excuse conduct that I acknowledge was inappropriate.</p><a class="ex-tab"
+          href="#pre-disciplinary-conference-notice">Pre-Disciplinary Conference Notice</a><a class="ex-tab"
+          href="#termination-letter">Termination Letter</a>
+        <h3>Ground 1 — The final decision should be based on the complete factual record</h3>
+        <p>The University should distinguish between the conduct I acknowledge and disputed descriptions of my intent,
+          the surrounding circumstances, and the history of my interactions with Shane. The communications and interview
+          recordings contain material evidence relevant to those questions. Shane never spoke about the incident on
+          March 6, 2024, so Reza had to make a determination based on secondhand accounts and available communications.
+        </p>
+        <p>The April 27 recording of my interview with Reza is particularly important because it shows that I did not
+          first provide this explanation after termination. I described the circumstances of the bathroom incident
+          during
+          the University's original investigation, including that Shane had previously expressed interest in the item
+          and
+          that the interaction occurred in the context of that prior conversation. Reza's questions and summary of my
+          explanation show that he understood there was context surrounding the incident. The appeal should therefore
+          distinguish between an admission that Shane saw the item while I was wearing it and an admission that I
+          intentionally exposed myself to Shane as an unsolicited sexual act. Those are not the same factual or
+          disciplinary characterization.</p>
+        <h3>Ground 2 — Shane’s account should be evaluated against verifiable communications</h3>
+        <p>The Teams communications demonstrate that sexual subject matter was not exclusively initiated by me and that
+          jokes concerning working without pants had been an established subject of interaction between Shane and me.
+          Those communications do not establish consent to any particular conduct, but they are relevant to evaluating
+          whether Shane’s later characterization accurately described the context.</p>
+        <h3>Ground 3 — Diego should not be treated as independent corroboration when his information was secondhand</h3>
+        <p>Diego’s April 27 interview indicates that his knowledge of the allegations came from Shane and that he did
+          not personally witness the conduct. This should be distinguished between firsthand observation, secondhand
+          reporting, and independent corroboration.</p>
+        <h3>Ground 4 — The University should explain how conflicting evidence was resolved</h3>
+        <p>The record contains factual disputes that were potentially verifiable through recordings and Teams
+          communications. The appeal should determine what evidence was actually reviewed, whether conflicting accounts
+          were tested, and how those conflicts affected the final decision.</p>
+        <h3>Ground 5 — The level of discipline should be evaluated in light of what the evidence actually establishes
+        </h3>
+        <p>I acknowledge that inappropriate conduct occurred. The question for the appeal is whether the complete and
+          accurate factual record supports termination as the appropriate level of corrective action, particularly where
+          the termination letter states that the decision rested solely on the April and March 2024 conduct and excluded
+          the unproven May 14 allegation.</p>
+        <p>This distinction is particularly important because I did not admit to the broader characterization of the
+          conduct that later appears to have been used against me. I acknowledged conduct that I believed was
+          inappropriate, but I also provided the surrounding circumstances and did not admit an intent to sexually
+          expose
+          or harass Shane. The discipline should therefore be evaluated based on the conduct actually established by the
+          evidence, rather than treating disputed interpretations of intent as admissions.</p>
+        <h3>Ground 6 — The timing and change in characterization of Shane's account should be considered</h3>
+        <p>The record shows that I had previously raised concerns about Diego through management channels and that, on
+          April 22, I told Shane that I had reported those concerns to management.</p>
+        <p>Before that conversation, Shane and I had engaged in communications that included sexual joking and other
+          sexual subject matter, including communications initiated or participated in by Shane. Shane had not
+          previously reported those interactions to management as unwanted conduct.</p>
+        <p>The day after the April 22 conversation, Shane discussed my conduct with Diego and characterized our prior
+          interactions in substantially different terms. Diego was not an eyewitness to the incidents and his
+          information concerning them came from Shane.</p>
+        <p>The record also establishes that Shane knew I was gay.</p>
+        <p>I am not asking the appeal to make a finding concerning Shane's motives or to determine whether
+          these events constitute discrimination or retaliation. Rather, I ask the appeal to consider the chronology,
+          the change in characterization, the source of Diego's information, and the surrounding communications when
+          evaluating the factual basis for the University's disciplinary decision.</p>
+        <p>These circumstances are particularly relevant because the University's final termination decision relied on
+          the characterization of these interactions, while the termination letter states that the decision was based
+          solely on the March 2024 and April conduct.</p>
+      </section>
+
+      <section id="exhibits">
+        <h2><span class="n">09</span>Exhibits</h2>
+        <div class="exhibit" id="job-classification">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Job Classification</h4>
+            <p>"I looked up every person in my department that had the same classification as me before the new
+              classification was assigned. I also looked up every person with the new classification assigned to me to
+              see what their previous classification was. Aubrey Schrag and I were both on the Northstar team, had the
+              same job title and did the same job yet his classification and salary don't match mine."</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-job-classification.png">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-job-classification.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="employment-verification">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Employment Verification</h4>
+            <p>A copy of my Employment Verification from EmpInfo.com showing years of service, final salary and job
+              title.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-employment-verification.pdf">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-employment-verification.pdf</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="reza-message-pay-bump">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Reza Teams Message — Jan 2026</h4>
+            <p>"I started the process to get you a bump in pay, don't tell anyone."</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-reza-message-bump.png">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-reza-message-bump.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="reza-message-proof">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Reza Teams Message — Asking for Proof</h4>
+            <p>I was reporting to Reza that co-workers that report to him are not working. He asked me to get him proof.
+            </p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-reza-proof.png">Open exhibit</a>
+            </div><span class="filename-hint">Expected file:exhibits/exhibit-reza-proof.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="reza-message-headcount">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Reza Teams Message — Reza asking for a head count</h4>
+            <p>Reza messaged me and asked to get him a head count of who is in the office.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-reza-headcount.png">Open exhibit</a>
+            </div><span class="filename-hint">Expected file:exhibits/exhibit-reza-headcount.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="reza-message-report-gis">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Reza Teams Message — Reporting when GIS team was in the office</h4>
+            <p>Reza asked me to send him the times when the GIS team came into the office and left for the day.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-reza-report-gis.png">Open exhibit</a>
+            </div><span class="filename-hint">Expected file:exhibits/exhibit-reza-report-gis.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="diego-second-job-photos">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Diego Working 2nd Job Photo Evidence</h4>
+            <p>Photos supporting the stewardship reports about Diego Andino. His University of Utah laptop sits on the
+              right and his personal laptop for his other job is being worked on.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-diego-photo.jpeg">Open exhibit</a>
+            </div><span class="filename-hint">Expected file:exhibits/exhibit-diego-photo.jpeg</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="diego-reports-to-reza">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Reports to Reza about Diego Stewardship</h4>
+            <p>Screenshots supporting the stewardship reports about Diego Andino.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-diego-reports.pdf">Open exhibit</a>
+            </div><span class="filename-hint">Expected file:exhibits/exhibit-diego-reports.pdf</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="suzanne-meeting-request">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Meeting with Suzanne Wayment regarding Diego Andino</h4>
+            <p>I messaged Suzanne and asked if we could have a quick chat to show her evidence of Diego not performing
+              and stewardship concerns.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-message-suzanne-meeting.png">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-message-suzanne-meeting.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="suzanne-diego-followup">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Conversation with Suzanne about Diego</h4>
+            <p>Suzanne and I were working through and issue and she asked if anything had changed with Diego. I informed
+              here that they had not. She said she would raise the issue again.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-message-suzanne-followup.png">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-message-suzanne-followup.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="reza-interview-diego">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>April 27, 2026 Recording — Reza Meeting with Diego</h4>
+            <p>Recording received through GRAMA request of interview done with Diego</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-reza-interview-diego.m4a">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-reza-interview-diego.m4a</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="reza-interview-bret">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>April 27, 2026 Recording — Reza Meeting with Bret</h4>
+            <p>Recording received through GRAMA request of interview done with Bret</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-reza-interview-bret.m4a">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-reza-interview-bret.m4a</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="reza-interview-shane">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>April 27, 2026 Recording — Reza Meeting with Shane</h4>
+            <p>Recording received through GRAMA request of interview done with Shane</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-reza-interview-shane.m4a">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-reza-interview-shane.m4a</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="shane-bathroom-chat">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Teams chat with Shane</h4>
+            <p>Messaging Shane right before going to the mens room and after after leaving.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-shane-bathroom.png">Open exhibit</a>
+            </div><span class="filename-hint">Expected file:exhibits/exhibit-shane-bathroom.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="shane-no-pants-chat">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Teams Chat with Shane About No Pants</h4>
+            <p>A teams chat where I as joking with Shane about working with no pants on.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-shane-no-pants.png">Open exhibit</a>
+            </div><span class="filename-hint">Expected file:exhibits/exhibit-shane-no-pants.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="shane-inseminating-chat-1">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Teams chat with Shane</h4>
+            <p>Shane sent me an innappropriate teams chat about one man saying he will keep inseminating his husband to
+              make a baby.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-shane-inseminating1.png">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-shane-inseminating1.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="shane-inseminating-chat-2">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Teams chat with Shane</h4>
+            <p>Shane sent me an innappropriate teams chat about one man saying he will keep inseminating his husband to
+              make a baby, larger image.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-shane-inseminating2.png">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-shane-inseminating2.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="shane-understall-chat">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Teams chat with Shane</h4>
+            <p>Shane sent me a message about playing a video game where one person named their horse "glory hole" and he
+              named his horse "understall" referring to a popular scene in gay sex of men having sex under the wall in a
+              bathroom stall.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-shane-understall.png">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-shane-understall.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="shane-oral-chat">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Teams chat with Shane</h4>
+            <p>Shane sent me an innappropriate teams chat saying he wasn't into "Oral" and then sent a follow up message
+              saying, "Oral distractions". I sent him a message about losing his focus because he was in a call and I
+              pulled a face at him.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-shane-oral.png">Open exhibit</a>
+            </div><span class="filename-hint">Expected file:exhibits/exhibit-shane-oral.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="work-in-office">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Teams chat with Reza - Working in Office</h4>
+            <p>A message I sent to Reza in December of 2025 talking about working in the office so I have a desk to work
+              at months before Shane accused me of working in the office so I can work without pants on.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-reza-work-in-office.png">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-reza-work-in-office.png</span>
+          </div>
+        </div>
+
+        <div class="exhibit" id="pre-disciplinary-conference-notice">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Pre-Disciplinary Conference Notice</h4>
+            <p>I received the pre-disciplinary conference notice the day before the administrative leave was to end
+              without ever hearing from OEO. The letter has 2 new allegations and the intent to terminate. I was given
+              26 hours to come up with a defense of the new allegations. This letter removed the restrictions from
+              university systems and Umail.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-pre-discplinary-conference.pdf">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-pre-discplinary-conference.pdf</span>
+          </div>
+
+        </div>
+        <div class="exhibit" id="termination-letter">
+          <div class="tab-badge">EXHIBIT</div>
+          <div class="details">
+            <h4>Termination Letter</h4>
+            <p>The final termination letter sent to me after I made my decision between resignation in lieu of
+              termination and termination with appeal rights.</p>
+            <div class="action-links"><a class="file-link" href="exhibits/exhibit-termination-letter.pdf">Open
+                exhibit</a></div><span class="filename-hint">Expected file:
+              exhibits/exhibit-termination-letter.pdf</span>
+          </div>
+        </div>
+
+      </section>
+
+      <footer>Prepared by Bret Pehrson · Termination Appeal Report · Last updated September 26, 2026</footer>
+    </main>
+
+  </div>
+
+  <!-- Exhibit Modal Popup -->
+  <div aria-hidden="true" class="ex-modal-backdrop" id="exhibitModal">
+    <div aria-labelledby="modalTitle" aria-modal="true" class="ex-modal" role="dialog">
+      <div class="ex-modal-header">
+        <h3 id="modalTitle">Exhibit Viewer</h3><button aria-label="Close modal" class="ex-modal-close" id="modalClose"
+          type="button">×</button>
+      </div>
+      <div class="ex-modal-body" id="modalBody"><!-- Media inserted dynamically --></div>
+      <div class="ex-modal-footer"><span id="modalFileHint"></span><a href="#" id="modalDirectLink" rel="noopener"
+          target="_blank">Open in new window ↗</a></div>
+    </div>
+  </div>
+  <script>   // Active section highlighting in the left rail as the reader scrolls.    
+    const links = Array.from(document.querySelectorAll('#railNav a'));
+    const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const idx = sections.indexOf(entry.target);
+        if (idx === -1) return;
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          links[idx].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 }); sections.forEach(s => { if (s) observer.observe(s); });
+    // In-page Exhibit Modal Popup    
+    const modal = document.getElementById('exhibitModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalFileHint = document.getElementById('modalFileHint');
+    const modalDirectLink = document.getElementById('modalDirectLink');
+    const modalClose = document.getElementById('modalClose');
+    function openExhibitModal(url, title, badgeText, filename) {
+      modalTitle.textContent = badgeText ? `${badgeText}: ${title}` : title;
+      modalDirectLink.href = url;
+      modalFileHint.textContent = filename || url;
+      const ext = url.split('.').pop().toLowerCase();
+      modalBody.innerHTML = '';
+      if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'].includes(ext)) {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = title;
+        modalBody.appendChild(img);
+      } else if (['mp3', 'wav', 'ogg', 'm4a'].includes(ext)) {
+        const audio = document.createElement('audio');
+        audio.controls = true;
+        audio.autoplay = true;
+        audio.src = url;
+        modalBody.appendChild(audio);
+      } else {
+        const iframe = document.createElement('iframe'); iframe.src = url; modalBody.appendChild(iframe);
+      } modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+    } function closeExhibitModal() {
+      modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); modalBody.innerHTML = '';
+    }
+    document.querySelectorAll('.exhibit .file-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = link.getAttribute('href'); const exhibitCard = link.closest('.exhibit');
+        const title = exhibitCard ? exhibitCard.querySelector('h4').textContent : 'Exhibit';
+        const badge = exhibitCard ? exhibitCard.querySelector('.tab-badge').textContent : '';
+        const hint = exhibitCard ? exhibitCard.querySelector('.filename-hint').textContent : url; openExhibitModal(url, title, badge, hint);
+      });
+    });
+    // In-text exhibit citations (a.ex-tab) open the modal directly instead of jumping to the Exhibits section   
+    document.querySelectorAll('a.ex-tab').forEach(link => {
+      const targetId = (link.getAttribute('href') || '').replace(/^#/, '');
+      const exhibitCard = targetId ? document.getElementById(targetId) : null;
+      const fileLink = exhibitCard ? exhibitCard.querySelector('.file-link') : null;
+      if (!fileLink) return; // no matching exhibit found — fall back to default anchor jump   
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = fileLink.getAttribute('href');
+        const title = exhibitCard.querySelector('h4').textContent;
+        const badge = exhibitCard.querySelector('.tab-badge').textContent;
+        const hint = exhibitCard.querySelector('.filename-hint').textContent;
+        openExhibitModal(url, title, badge, hint);
+      });
+    });
+    modalClose.addEventListener('click', closeExhibitModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeExhibitModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        closeExhibitModal();
+      }
+    });
+  </script>
+</body>
+
+</html>
